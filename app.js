@@ -6,16 +6,19 @@ function limpiarCaja(){
 }
 
 function agregarAmigo(){
-    let nuevoAmigo = document.getElementById('amigo').value;
-    //console.log(nuevoAmigo)
-    listaAmigos.push(nuevoAmigo);
-    //console.log(listaAmigos);
-    limpiarCaja();
-    imprimeListaAmigos();
+    let nuevoAmigo =String( document.getElementById('amigo').value);
+    console.log(typeof(nuevoAmigo));
+    //Verificar un nombre valido: solo letras, puede incluir acentos o letra ñ
+    if(/^[a-zA-ZáéíóúÁÉÍÓÚñÑ]+$/.test(nuevoAmigo)){
+        //console.log(nuevoAmigo)
+        listaAmigos.push(nuevoAmigo);
+        //console.log(listaAmigos);
+        limpiarCaja();      
+    } else{
+        //Nombre invalido
+        alert('Introduzca un nombre valido');
+        limpiarCaja()
+    }
+    
 }
-/*
-function imprimeListaAmigos(){
-    let amigos = document.querySelector('listaAmigos');
-    amigos.innerHTML = listaAmigos;
-}
-*/
+
