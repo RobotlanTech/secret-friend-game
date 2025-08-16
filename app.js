@@ -43,13 +43,12 @@ function sortearAmigo(){
         console.log('Añade amigos para sortear');
     } else {
         let indice = Math.floor(Math.random()*amigos.length+1);
-        let amigoSorteado = amigos[indice-1];
         
         let elementoResultado = document.getElementById('resultado');
+        //limpia la lista de html
         elementoResultado.innerHTML = '';
-        let resultado = document.createElement('li');
-        resultado.textContent = amigoSorteado;
-        elementoResultado.appendChild(resultado);
+        //Añade al amigo sorteado en la lista de html
+        elementoResultado.innerHTML = `<li>${amigos[indice-1]}</li>`
         
     }
 }
