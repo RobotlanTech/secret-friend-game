@@ -8,6 +8,14 @@ function limpiarCaja(){
 function agregarAmigo(){
     let nuevoAmigo =String( document.getElementById('amigo').value);
     console.log(typeof(nuevoAmigo));
+
+    // Nueva comprobación: ¿ya existe el amigo en la lista?
+    if (amigos.includes(nuevoAmigo)) {
+        alert('Este nombre ya ha sido agregado. Intenta con otro.');
+        limpiarCaja();
+        return; // Detiene la ejecución de la función
+    }
+
     //Verificar un nombre valido: solo letras, puede incluir acentos o letra ñ
     if(/^[a-zA-ZáéíóúÁÉÍÓÚñÑ]+$/.test(nuevoAmigo)){
         //console.log(nuevoAmigo)
@@ -42,13 +50,13 @@ function sortearAmigo(){
     if(amigos.length < 1){
         console.log('Añade amigos para sortear');
     } else {
-        let indice = Math.floor(Math.random()*amigos.length+1);
+        let indice = Math.floor(Math.random()*amigos.length);
         
         let elementoResultado = document.getElementById('resultado');
         //limpia la lista de html
         elementoResultado.innerHTML = '';
         //Añade al amigo sorteado en la lista de html
-        elementoResultado.innerHTML = `<li>${amigos[indice-1]}</li>`
+        elementoResultado.innerHTML = `<li>${amigos[indice]}</li>`
         
     }
 }
