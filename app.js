@@ -5,31 +5,53 @@ function limpiarCaja(){
     document.querySelector('#amigo').value = '';
 }
 
-function agregarAmigo(){
-    let nuevoAmigo =String( document.getElementById('amigo').value);
-    console.log(typeof(nuevoAmigo));
+function agregarAmigo() {
+    let nuevoAmigo = document.getElementById('amigo').value.trim(); // .trim() elimina espacios en blanco al inicio y final
 
-    // Nueva comprobación: ¿ya existe el amigo en la lista?
-    if (amigos.includes(nuevoAmigo)) {
-        alert('Este nombre ya ha sido agregado. Intenta con otro.');
+    // 1. Validar que el nombre no esté vacío y sea válido
+    if (!/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/.test(nuevoAmigo)) {
+        alert('Por favor, inserta un nombre válido.');
         limpiarCaja();
-        return; // Detiene la ejecución de la función
+        return;
     }
 
-    //Verificar un nombre valido: solo letras, puede incluir acentos o letra ñ
-    if(/^[a-zA-ZáéíóúÁÉÍÓÚñÑ]+$/.test(nuevoAmigo)){
-        //console.log(nuevoAmigo)
-        amigos.push(nuevoAmigo);
-        //console.log(amigos);
-        imprimirListaAmigos();
-        limpiarCaja(); 
-          
+    // 2. Comprobar si el amigo ya existe en la lista
+    if (amigos.includes(nuevoAmigo)) {
+        // --- INICIA LA NUEVA LÓGICA PARA DUPLICADOS ---
 
-    } else{
-        //Nombre invalido
-        alert('Por favor, inserte un nombre.');
-        limpiarCaja();
-    }    
+        // Pide el apellido del amigo que YA ESTABA en la lista
+        let apellidoExistente = prompt(`Ya existe un amigo llamado '${nuevoAmigo}'. Para diferenciarlo, escribe su apellido o algo que lo identifique:`);
+        
+        // Si el usuario presiona "Cancelar", no hacemos nada
+        if (apellidoExistente === null) {
+            limpiarCaja();
+            return; 
+        }
+
+        // Pide el apellido del NUEVO amigo que se está agregando
+        let apellidoNuevo = prompt(`Excelente. Ahora, escribe el apellido del nuevo '${nuevoAmigo}' que quieres agregar:`);
+
+        if (apellidoNuevo === null) {
+            limpiarCaja();
+            return;
+        }
+
+        // Busca el índice del amigo original para poder actualizarlo
+        const indiceExistente = amigos.indexOf(nuevoAmigo);
+        amigos[indiceExistente] = `${nuevoAmigo} ${apellidoExistente.trim()}`;
+
+        // Agrega el nuevo amigo con su apellido
+        amigos.push(`${nuevoAmigo} ${apellidoNuevo.trim()}`);
+
+        // --- TERMINA LA NUEVA LÓGICA ---
+
+    } else {
+        // Si no es un duplicado, simplemente lo agregamos como antes
+        amigos.push(nuevoAmigo);
+    }
+
+    imprimirListaAmigos();
+    limpiarCaja();
 }
 
 function imprimirListaAmigos(listaAmigos){
