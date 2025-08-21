@@ -3,6 +3,11 @@
 
 Un sencillo pero muy divertido juego que te permitira agregar tus amigos a una lista, y sortearlos para que sepas quien es tu "amigo secreto"
 
+![demostracion-juego](https://github.com/user-attachments/assets/9f51f83b-b924-4051-90d2-40a371c1a653)
+
+
+
+
 ---
 ## ✨ Características Principales
 
