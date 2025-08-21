@@ -78,7 +78,7 @@ function sortearAmigo(){
         //limpia la lista de html
         elementoResultado.innerHTML = '';
         //Añade al amigo sorteado en la lista de html
-        elementoResultado.innerHTML = `<li>${amigos[indice]}</li>`
+        elementoResultado.innerHTML = `<li>El amigo secreto sorteado es: ${amigos[indice]}</li>`
         
     }
 }
